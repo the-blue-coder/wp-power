@@ -1,0 +1,21 @@
+{
+    "name": "bocasay/custom-dev-ext",
+    "description": "Custom Dev Extended",
+    "type": "wp-plugin",
+    "authors": [
+        {
+            "name": "Bocasay",
+            "email": "jrakotoarison@bocasay.com"
+        }
+    ],
+    "require": {
+        "spipu/html2pdf": "^5.2",
+        "mpdf/mpdf": "^8.0",
+        "clegginabox/pdf-merger": "dev-master",
+        "mikehaertl/phpwkhtmltopdf": "^2.4",
+        "spatie/pdf-to-image": "^2.0",
+        "czproject/pdf-rotate": "^2.0",
+        "guzzlehttp/guzzle": "^7.0",
+        "gumlet/php-image-resize": "^2.0"
+    }
+}
