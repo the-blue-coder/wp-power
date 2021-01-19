@@ -11,6 +11,11 @@ let mix = require('webpack-mix');
  |
  */
 
+mix.autoload({
+   'jquery': ['$', 'window.jQuery', "jQuery", "window.$", "jquery", "window.jquery"],
+   'popper.js/dist/umd/popper.js': ['Popper', 'window.Popper']
+});
+
 mix.js('resources/js/main.js', 'dist/custom.min.js')
    .js('resources/js/admin.js', 'dist/admin.min.js')
 ;

@@ -1,8 +1,6 @@
 {
     "/dist/admin.min.js": "/dist/admin.min.js",
-    "/dist/admin.min.js.map": "/dist/admin.min.js.map",
     "/dist/custom.min.js": "/dist/custom.min.js",
     "/dist/custom.min.css": "/dist/custom.min.css",
-    "/dist/admin.min.css": "/dist/admin.min.css",
-    "/dist/custom.min.js.map": "/dist/custom.min.js.map"
+    "/dist/admin.min.css": "/dist/admin.min.css"
 }

@@ -1,7 +1,7 @@
 <?php
 
 $templates = [
-    // 'slug' => 'Name',
+    'homepage' => 'Homepage'
 
 ];
 

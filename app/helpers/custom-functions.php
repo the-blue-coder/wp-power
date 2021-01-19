@@ -65,7 +65,7 @@ function view($path, $data = [])
     $path = str_replace('.', '/', $path);
 
     ob_start();
-        include(CDEXT_PLUGIN_DIR . '/resources/views/' . $path . '.php');
+        include(get_stylesheet_directory() . '/resources/views/' . $path . '.php');
     return ob_get_clean();
 }
 
