@@ -20,6 +20,7 @@ require 'app/helpers/custom-functions.php';
 /**
  * WP
  */
+require 'app/wp/updates-handler.php';
 require 'app/wp/assets.php';
 require 'app/wp/actions.php';
 require 'app/wp/filters.php';
