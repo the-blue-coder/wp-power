@@ -18,11 +18,6 @@ require 'config/woocommerce.php';
 require 'app/helpers/custom-functions.php';
 
 /**
- * Services
- */
-
-
-/**
  * WP
  */
 require 'app/wp/assets.php';

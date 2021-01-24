@@ -1,11 +1,11 @@
 {
-    "name": "bocasay/custom-dev-ext",
-    "description": "Custom Dev Extended",
-    "type": "wp-plugin",
+    "name": "thebluecoder/wp-power",
+    "description": "WP Power",
+    "type": "wp-plugin-or-theme-starter",
     "authors": [
         {
-            "name": "Bocasay",
-            "email": "jrakotoarison@bocasay.com"
+            "name": "The Blue Coder",
+            "email": "jd.rakotoarison@gmail.com"
         }
     ],
     "require": {
@@ -17,5 +17,10 @@
         "czproject/pdf-rotate": "^2.0",
         "guzzlehttp/guzzle": "^7.0",
         "gumlet/php-image-resize": "^2.0"
+    },
+    "autoload": {
+        "classmap": [
+            "app/services/"
+        ]
     }
 }
