@@ -1,7 +1,7 @@
 /**
  * Global vars
  */
-window.freexcomics = {
+window.WPPower = {
     configs: {},
 
     jQueryObjects: {},
@@ -27,6 +27,6 @@ $(window).on('popstate', function () {
  */
 $.ajaxSetup({
     headers: {
-        'X-WP-Nonce': freexcomics.PHPToJS.WPRestNonce
+        'X-WP-Nonce': WPPower.PHPToJS.WPRestNonce
     }
 });
