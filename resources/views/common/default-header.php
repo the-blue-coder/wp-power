@@ -6,7 +6,6 @@
 
         <link href="<?php echo WP_POWER_DIST_URL . '/bootstrap.min.css' ?>" rel="stylesheet" />
         <link href="<?php echo WP_POWER_DIST_URL . '/custom.min.css?v=' . rand(1, 100000); ?>" rel="stylesheet" />
-        <link href="<?php echo WP_POWER_DIST_URL . '/admin.min.css?v=' . rand(1, 100000); ?>" rel="stylesheet" />
 
         <title><?php echo get_the_title(); ?></title>
     </head>
