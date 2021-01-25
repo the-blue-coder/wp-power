@@ -33,5 +33,5 @@ require 'app/wp/shortcodes.php';
  * WP Rest API
  */
 add_action('rest_api_init', function () {
-    require 'app/wp/wp-rest-api.php';
+    require 'routes/wp-rest-api.php';
 });
