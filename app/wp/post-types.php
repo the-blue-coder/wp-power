@@ -16,8 +16,9 @@
 //         'menu_position' => 10,
 //         'show_in_menu' => false,
 //         'exclude_from_search' => true,
-//         'rewrite' => false,
+//         'rewrite' => true,
 //         'supports' => [
+//             'title',
 //             'custom-fields'
 //         ]
 //     ]);
