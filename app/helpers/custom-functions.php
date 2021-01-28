@@ -65,7 +65,7 @@ function view($path, $data = [])
     $path = str_replace('.', '/', $path);
 
     ob_start();
-        include(get_stylesheet_directory() . '/resources/views/' . $path . '.php');
+        include(WP_POWER_VIEWS_DIR . '/resources/views/' . $path . '.php');
     return ob_get_clean();
 }
 
