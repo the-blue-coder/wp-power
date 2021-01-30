@@ -12,16 +12,15 @@ let mix = require('webpack-mix');
  */
 
 mix.autoload({
-   'jquery': ['$', 'window.jQuery', "jQuery", "window.$", "jquery", "window.jquery"],
-   'popper.js/dist/umd/popper.js': ['Popper', 'window.Popper']
+   'jquery': ['$', 'window.jQuery', "jQuery", "window.$", "jquery", "window.jquery"]
 });
 
-mix.js('resources/js/main.js', 'dist/custom.min.js')
-   .js('resources/js/admin.js', 'dist/admin.min.js')
+mix.js('resources/js/main.js', 'dist/js/custom.min.js')
+   .js('resources/js/admin.js', 'dist/js/admin.min.js')
 ;
 
-mix.sass('resources/scss/main.scss', 'dist/custom.min.css')
-   .sass('resources/scss/admin.scss', 'dist/admin.min.css')
+mix.sass('resources/scss/main.scss', 'dist/css/custom.min.css')
+   .sass('resources/scss/admin.scss', 'dist/css/admin.min.css')
 ;
 
 mix.sourceMaps();
