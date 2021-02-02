@@ -113,11 +113,12 @@ class Helpers
     /**
      * Scroll to top
      */
-    scrollToTop() {
-        window.scrollTo({
-            top: 0, 
-            behavior: 'smooth'
-        });
+    scrollToTop(duration, callback) {
+        $('html, body').animate(
+            {scrollTop: 0},
+            duration,
+            callback
+        );
     }
 
     /**
@@ -283,12 +284,39 @@ class Helpers
      */
     formErrors(form, errors) {
         for (let name in errors) {
-            form.find('.error-' + name).html(errors[name][0]);
+            form.find('.error-' + name)
+                .html(errors[name][0])
+            ;
         }
 
         if (typeof(errors) === 'string') {
-            form.find('.error.global').html(errors);
+            form.find('.error.global')
+                .html(errors)
+            ;
         }
+    }
+
+    /**
+     * Print WP form errors
+     */
+    WPFormErrors(form, errors) {
+        let errorsWrapper = form.find('.errors');
+        let errorsString = '';
+
+        for (const [key, value] of Object.entries(errors)) {
+            errorsString += value[0] + '<br />';
+        }
+
+        errorsWrapper.html(errorsString);
+    }
+
+    /**
+     * Empty WP form errors
+     */
+    emptyWPFormErrors(form) {
+        form.find('.errors')
+            .empty()
+        ;
     }
 
     /**
