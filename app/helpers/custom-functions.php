@@ -291,6 +291,10 @@ function getRecaptchaResponse($recaptchaToken)
  */
 function isRecaptchaValid($recaptchaResponse, $action)
 {
+    if (!is_object($recaptchaResponse)) {
+		return false;
+    }
+    
 	return $recaptchaResponse->success && $recaptchaResponse->score > 0.5 && $recaptchaResponse->action === $action;
 }
 
