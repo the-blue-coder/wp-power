@@ -285,3 +285,11 @@ function getRecaptchaResponse($recaptchaToken)
     
     return json_decode($recaptchaResponse);
 }
+
+/**
+ * Check if recaptcha is good to go
+ */
+function recaptchaIsValid($recaptchaResponse, $action)
+{
+	return $recaptchaResponse->success && $recaptchaResponse->score > 0.5 && $recaptchaResponse->action === $action;
+}
