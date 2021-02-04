@@ -275,3 +275,13 @@ function sortTermsHierarchically(Array &$cats, Array &$into, $parentID = 0)
         sortTermsHierarchically($cats, $topCat->children, $topCat->term_id);
     }
 }
+
+/**
+ * Get recaptcha response
+ */
+function getRecaptchaResponse($recaptchaToken)
+{
+    $recaptchaResponse = file_get_contents(WP_POWER_RECAPTCHA_URL . '?secret=' . WP_POWER_API_KEYS['google']['recaptcha']['secretKey'] . '&response=' . $recaptchaToken);
+    
+    return json_decode($recaptchaResponse);
+}

@@ -10,6 +10,7 @@ require 'vendor/autoload.php';
  */
 require 'config/paths.php';
 require 'config/api-keys.php';
+require 'config/api-endpoints.php';
 require 'config/woocommerce.php';
 
 /**
