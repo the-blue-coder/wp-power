@@ -23,8 +23,7 @@ require 'app/helpers/custom-functions.php';
  */
 require 'app/wp/updates-handler.php';
 require 'app/wp/assets.php';
-require 'app/wp/actions.php';
-require 'app/wp/filters.php';
+require 'app/wp/custom-hooks.php';
 require 'app/wp/woocommerce.php';
 require 'app/wp/templates.php';
 require 'app/wp/post-types.php';
