@@ -293,3 +293,12 @@ function isRecaptchaValid($recaptchaResponse, $action)
 {
 	return $recaptchaResponse->success && $recaptchaResponse->score > 0.5 && $recaptchaResponse->action === $action;
 }
+
+/**
+ * Validate recaptcha
+ */
+ function validateRecaptcha($recaptchaToken, $action)
+ {
+     $recaptchaResponse = getRecaptchaResponse($recaptchaToken);
+     return isRecaptchaValid($recaptchaResponse, $action);
+ }
