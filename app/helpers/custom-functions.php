@@ -289,7 +289,7 @@ function getRecaptchaResponse($recaptchaToken)
 /**
  * Check if recaptcha is good to go
  */
-function recaptchaIsValid($recaptchaResponse, $action)
+function isRecaptchaValid($recaptchaResponse, $action)
 {
 	return $recaptchaResponse->success && $recaptchaResponse->score > 0.5 && $recaptchaResponse->action === $action;
 }
