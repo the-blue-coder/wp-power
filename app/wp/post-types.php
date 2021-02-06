@@ -9,16 +9,17 @@
 //             'name' => 'Plural',
 //             'singular_name' => 'Singular'
 //         ],
-//         'public' => false,
+//         'public' => true,
 //         'publicly_queryable' => true,
 //         'show_ui' => true,
-//         'has_archive' => false,
+//         'has_archive' => true,
 //         'menu_position' => 10,
-//         'show_in_menu' => false,
-//         'exclude_from_search' => true,
+//         'show_in_menu' => true,
+//         'exclude_from_search' => false,
 //         'rewrite' => true,
 //         'supports' => [
 //             'title',
+//             'editor',
 //             'custom-fields'
 //         ]
 //     ]);
