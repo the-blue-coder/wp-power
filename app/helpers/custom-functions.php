@@ -30,7 +30,7 @@ function urlOrigin( $s, $use_forwarded_host = false )
 /**
  * Full url
  */
-function fullUrl( $s, $use_forwarded_host = false )
+function getFullUrl( $s, $use_forwarded_host = false )
 {
     return urlOrigin($s, $use_forwarded_host) . $s['REQUEST_URI'];
 }
