@@ -28,7 +28,7 @@ require 'app/wp/woocommerce.php';
 require 'app/wp/templates.php';
 require 'app/wp/post-types.php';
 require 'app/wp/shortcodes.php';
-require 'app/wp/metaboxes.php';
+require 'app/wp/meta-boxes.php';
 
 /**
  * WP Rest API
