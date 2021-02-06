@@ -1,6 +1,21 @@
 <?php
 
 /**
+ * Make WooCommerce functions work in WP Rest API
+ */
+add_filter('woocommerce_is_rest_api_request', function ($isRestAPIRequest) {
+    if (empty($_SERVER['REQUEST_URI'])) {
+        return $isRestAPIRequest;
+    }
+
+    if (strpos($_SERVER['REQUEST_URI'], 'wp-power') === false) {
+        return $isRestAPIRequest;
+    }
+
+    return false;
+});
+
+/**
  * Add WooCommerce theme support
  */
 add_action('after_setup_theme', function () {
