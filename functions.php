@@ -8,6 +8,8 @@ require 'vendor/autoload.php';
 /**
  * Configs
  */
+require 'config/global.php';
+require 'config/mail.php';
 require 'config/paths.php';
 require 'config/api-keys.php';
 require 'config/api-endpoints.php';
