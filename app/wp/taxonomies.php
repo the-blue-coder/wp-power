@@ -13,9 +13,7 @@
 //         'update_item' => __('Update singular', env('APP_TD')),
 //         'all_items' => __('All plural', env('APP_TD')),
 //         'search_items' =>  __('Search plural', env('APP_TD')),
-//         'parent_item' => __('Parent singular', env('APP_TD')),
-//         'parent_item_colon' => __('Parent singular:', env('APP_TD')),
-//         'menu_name' => __('Plural', env('APP_TD')),
+//         'menu_name' => __('Plural', env('APP_TD'))
 //     ];    
 
 //     register_taxonomy(
@@ -30,7 +28,7 @@
 //             'show_in_rest' => true,
 //             'show_admin_column' => true,
 //             'query_var' => true,
-//             'rewrite' => ['slug' => 'slug']
+//             'rewrite' => ['slug' => 'plural-slug']
 //         ]
 //     );
 // });
