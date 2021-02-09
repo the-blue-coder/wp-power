@@ -31,6 +31,7 @@ require 'app/wp/post-types.php';
 require 'app/wp/taxonomies.php';
 require 'app/wp/shortcodes.php';
 require 'app/wp/meta-boxes.php';
+require 'app/wp/user-roles.php';
 require 'app/wp/woocommerce.php';
 
 /**
