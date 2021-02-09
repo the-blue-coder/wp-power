@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Taxonomy name
+ * Taxonomy plural name
  */
 // add_action('init', function () {
 //     $labels = [
