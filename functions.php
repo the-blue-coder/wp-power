@@ -29,6 +29,7 @@ require 'app/wp/hooks.php';
 require 'app/wp/templates.php';
 require 'app/wp/post-types.php';
 require 'app/wp/taxonomies.php';
+require 'app/wp/user-taxonomies.php';
 require 'app/wp/shortcodes.php';
 require 'app/wp/meta-boxes.php';
 require 'app/wp/user-roles.php';
