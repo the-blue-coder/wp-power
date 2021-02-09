@@ -43,7 +43,7 @@
 //             'labels' => $labels,
 //             'public' =>true,
 //             'single_value' => false,
-//             'show_admin_column' => true,
+//             'show_admin_column' => false,
 //             'capabilities' => $capabilities,
 //             'rewrite' => $rewrite
 //         ]
