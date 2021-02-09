@@ -5,7 +5,7 @@
  */
 
 /**
- * User taxonomy name
+ * User taxonomy plural name
  */
 // add_action('init', function () {
 //     $labels = [
