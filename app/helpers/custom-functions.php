@@ -442,9 +442,10 @@ if (!function_exists('adminCustomTaxonomyFilters')) {
                     foreach ($taxonomies as $taxonomy) {
                         $selected = isset($_GET[$taxonomy]) ? $_GET[$taxonomy] : '';
                         $infoTaxonomy = get_taxonomy($taxonomy);
+                        $termsNumber = wp_count_terms($infoTaxonomy->name, ['hide_empty' => false]);
             
-                        if (is_object($infoTaxonomy)) {
-                            wp_dropdown_categories(array(
+                        if ($termsNumber > 0) {
+                            wp_dropdown_categories([
                                 'show_option_all' => sprintf( __($selectLabel . ' %s', $textDomain), strtolower($infoTaxonomy->labels->singular_name)),
                                 'taxonomy' => $taxonomy,
                                 'name' => $taxonomy,
@@ -452,7 +453,7 @@ if (!function_exists('adminCustomTaxonomyFilters')) {
                                 'selected' => $selected,
                                 'show_count' => true,
                                 'hide_empty' => true,
-                            ));
+                            ]);
                         }
                     }
                 }
@@ -470,13 +471,17 @@ if (!function_exists('adminCustomTaxonomyFilters')) {
                 $taxonomies = $case['taxonomies'];
         
                 foreach ($taxonomies as $taxonomy) {
+                    $infoTaxonomy = get_taxonomy($taxonomy);
+                    $termsNumber = wp_count_terms($infoTaxonomy->name, ['hide_empty' => false]);
+
                     if (
                         $pagenow === 'edit.php' && 
                         isset($qVars['post_type']) && 
                         $qVars['post_type'] === $postType && 
                         isset($qVars[$taxonomy]) && 
                         is_numeric($qVars[$taxonomy]) && 
-                        (int) $qVars[$taxonomy] !== 0 
+                        (int) $qVars[$taxonomy] !== 0 &&
+                        $termsNumber > 0
                     ) 
                     {
                         $term = get_term_by('id', $qVars[$taxonomy], $taxonomy);
