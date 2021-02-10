@@ -455,7 +455,7 @@ if (!function_exists('WPAdminCustomTaxonomyFilters')) {
                     foreach ($taxonomies as $taxonomy) {
                         $selected = isset($_GET[$taxonomy]) ? $_GET[$taxonomy] : '';
                         $infoTaxonomy = get_taxonomy($taxonomy);
-                        $termsNumber = wp_count_terms($infoTaxonomy->name, ['hide_empty' => false]);
+                        $termsNumber = wp_count_terms($infoTaxonomy->name, ['hide_empty' => true]);
             
                         if ($termsNumber > 0) {
                             wp_dropdown_categories([
