@@ -28,6 +28,7 @@ require 'app/wp/assets.php';
 require 'app/wp/hooks.php';
 require 'app/wp/templates.php';
 require 'app/wp/post-types.php';
+require 'app/wp/post-statuses.php';
 require 'app/wp/taxonomies.php';
 require 'app/wp/user-taxonomies.php';
 require 'app/wp/shortcodes.php';
