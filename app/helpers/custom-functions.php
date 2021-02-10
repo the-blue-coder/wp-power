@@ -423,3 +423,65 @@ if (!function_exists('getIPInfo')) {
         return $output;
     }
 }
+
+/**
+ * Filter posts by custom taxonomies in admin
+ */
+if (!function_exists('adminCustomTaxonomyFilters')) {
+    function adminCustomTaxonomyFilters($cases, $selectLabel = 'Filter by')
+    {
+        add_action('restrict_manage_posts', function () use ($cases, $selectLabel) {
+            global $typenow;
+        
+            foreach ($cases as $case) {
+                $postType = $case['postType'];
+                $taxonomies = $case['taxonomies'];
+        
+                if ($typenow === $postType) {
+                    foreach ($taxonomies as $taxonomy) {
+                        $selected = isset($_GET[$taxonomy]) ? $_GET[$taxonomy] : '';
+                        $infoTaxonomy = get_taxonomy($taxonomy);
+            
+                        if (is_object($infoTaxonomy)) {
+                            wp_dropdown_categories(array(
+                                'show_option_all' => sprintf( __($selectLabel . ' %s', 'textdomain'), strtolower($infoTaxonomy->labels->singular_name)),
+                                'taxonomy' => $taxonomy,
+                                'name' => $taxonomy,
+                                'orderby' => 'name',
+                                'selected' => $selected,
+                                'show_count' => true,
+                                'hide_empty' => true,
+                            ));
+                        }
+                    }
+                }
+            }
+        });
+
+        add_filter('parse_query', function ($query) use ($cases) {
+            global $pagenow;
+        
+            $qVars = &$query->query_vars;
+        
+            foreach ($cases as $case) {
+                $postType = $case['postType'];
+                $taxonomies = $case['taxonomies'];
+        
+                foreach ($taxonomies as $taxonomy) {
+                    if (
+                        $pagenow === 'edit.php' && 
+                        isset($qVars['post_type']) && 
+                        $qVars['post_type'] == $postType && 
+                        isset($qVars[$taxonomy]) && 
+                        is_numeric($qVars[$taxonomy]) && 
+                        (int) $qVars[$taxonomy] !== 0 
+                    ) 
+                    {
+                        $term = get_term_by('id', $qVars[$taxonomy], $taxonomy);
+                        $qVars[$taxonomy] = $term->slug;
+                    }
+                }
+            }
+        });
+    }
+}
