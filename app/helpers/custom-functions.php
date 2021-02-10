@@ -425,10 +425,22 @@ if (!function_exists('getIPInfo')) {
 }
 
 /**
- * Filter posts by custom taxonomies in admin
+ * Check if a post type has some posts (WordPress)
  */
-if (!function_exists('adminCustomTaxonomyFilters')) {
-    function adminCustomTaxonomyFilters($cases, $selectLabel = 'Filter by', $textDomain = WP_POWER_TEXT_DOMAIN)
+if (!function_exists('WPCheckIfPostTypeHasPosts')) {
+    function WPCheckIfPostTypeHasPosts($slug)
+    {
+        global $wp_query;
+
+        return $wp_query->found_posts > 0;
+    }
+}
+
+/**
+ * Filter posts by custom taxonomies in admin (WordPress)
+ */
+if (!function_exists('WPAdminCustomTaxonomyFilters')) {
+    function WPAdminCustomTaxonomyFilters($cases, $selectLabel = 'Filter by', $textDomain = WP_POWER_TEXT_DOMAIN)
     {
         //Display dropdown
         add_action('restrict_manage_posts', function () use ($cases, $selectLabel, $textDomain) {
@@ -436,9 +448,10 @@ if (!function_exists('adminCustomTaxonomyFilters')) {
         
             foreach ($cases as $case) {
                 $postType = $case['postType'];
+                $hasPosts = WPCheckIfPostTypeHasPosts($postType);
                 $taxonomies = $case['taxonomies'];
         
-                if ($typenow === $postType) {
+                if ($typenow === $postType && $hasPosts) {
                     foreach ($taxonomies as $taxonomy) {
                         $selected = isset($_GET[$taxonomy]) ? $_GET[$taxonomy] : '';
                         $infoTaxonomy = get_taxonomy($taxonomy);
@@ -468,24 +481,27 @@ if (!function_exists('adminCustomTaxonomyFilters')) {
         
             foreach ($cases as $case) {
                 $postType = $case['postType'];
+                $hasPosts = WPCheckIfPostTypeHasPosts($postType);
                 $taxonomies = $case['taxonomies'];
         
-                foreach ($taxonomies as $taxonomy) {
-                    $infoTaxonomy = get_taxonomy($taxonomy);
-                    $termsNumber = wp_count_terms($infoTaxonomy->name, ['hide_empty' => false]);
-
-                    if (
-                        $pagenow === 'edit.php' && 
-                        isset($qVars['post_type']) && 
-                        $qVars['post_type'] === $postType && 
-                        isset($qVars[$taxonomy]) && 
-                        is_numeric($qVars[$taxonomy]) && 
-                        (int) $qVars[$taxonomy] !== 0 &&
-                        $termsNumber > 0
-                    ) 
-                    {
-                        $term = get_term_by('id', $qVars[$taxonomy], $taxonomy);
-                        $qVars[$taxonomy] = $term->slug;
+                if ($hasPosts) {
+                    foreach ($taxonomies as $taxonomy) {
+                        $infoTaxonomy = get_taxonomy($taxonomy);
+                        $termsNumber = wp_count_terms($infoTaxonomy->name, ['hide_empty' => false]);
+    
+                        if (
+                            $pagenow === 'edit.php' && 
+                            isset($qVars['post_type']) && 
+                            $qVars['post_type'] === $postType && 
+                            isset($qVars[$taxonomy]) && 
+                            is_numeric($qVars[$taxonomy]) && 
+                            (int) $qVars[$taxonomy] !== 0 &&
+                            $termsNumber > 0
+                        ) 
+                        {
+                            $term = get_term_by('id', $qVars[$taxonomy], $taxonomy);
+                            $qVars[$taxonomy] = $term->slug;
+                        }
                     }
                 }
             }
