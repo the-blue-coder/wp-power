@@ -431,7 +431,7 @@ if (!function_exists('adminCustomTaxonomyFilters')) {
     function adminCustomTaxonomyFilters($cases, $selectLabel = 'Filter by', $textDomain = WP_POWER_TEXT_DOMAIN)
     {
         //Display dropdown
-        add_action('restrict_manage_posts', function () use ($cases, $selectLabel) {
+        add_action('restrict_manage_posts', function () use ($cases, $selectLabel, $textDomain) {
             global $typenow;
         
             foreach ($cases as $case) {
