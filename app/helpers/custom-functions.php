@@ -505,3 +505,89 @@ if (!function_exists('WPAdminCustomTaxonomyFilters')) {
         });
     }
 }
+
+/**
+ * Create custom post status (WordPress)
+ */
+if (!function_exists('WPCreateCustomPostStatus')) {
+    function WPCreateCustomPostStatus($postType, $label, $slug)
+    {
+        add_action('init', function () use ($postType, $label, $slug) {
+            register_post_status(
+                $slug, 
+                [
+                    'label' => _x($label, $postType),
+                    'label_count' => _n_noop($label . ' <span class="count">(%s)</span>', $label .' <span class="count">(%s)</span>'),
+                    'public' => true,
+                    'exclude_from_search' => false,
+                    'show_in_admin_all_list' => true,
+                    'show_in_admin_status_list' => true
+                ]
+            );
+        });
+        
+        add_action('post_submitbox_misc_actions', function () use ($postType, $label, $slug) {
+            global $post;
+        
+            if ($post->post_type !== $postType) {
+                return false;
+            }
+        
+            $status = '';
+        
+            if ($post->post_status === $slug) {
+                $status = "
+                    jQuery('#post-status-display').text('" . $label . "');
+                    jQuery('select[name=\"post_status\"]' ).val('" . $slug . "');
+                ";
+            }
+            
+            echo "
+                <script>
+                    jQuery(document).ready(function() {
+                        jQuery('select[name=\"post_status\"]' ).append( '<option value=\"" . $slug . "\">" . $label . "</option>' );
+                        " . $status . "
+                    });
+                </script>
+            ";
+        });
+        
+        add_action('admin_footer-edit.php', function () use ($postType, $label, $slug) {
+            global $post;
+        
+            if ($post->post_type !== $postType) {
+                return false;
+            }
+            
+            echo "
+                <script>
+                    jQuery(document).ready( function() {
+                        jQuery('select[name=\"_status\"]' ).append( '<option value=\"" . $slug . "\">" . $label . "</option>');
+                    });
+                </script>
+            ";
+        });
+        
+        add_filter('display_post_states', function ($states) use ($postType, $label, $slug) {
+            global $post;
+        
+            $arg = get_query_var('post_status');
+        
+            if ($arg !== $slug){
+                if ($post->post_status === $slug) {
+                    echo "
+                        <script>
+                            jQuery(document).ready(function() {
+                                jQuery('#post-status-display').text('" . $label . "');
+                            });
+                        </script>
+                    ";
+        
+                    return [$label];
+                }
+            }
+        
+            return $states;
+        });
+    }
+}
