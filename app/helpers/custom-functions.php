@@ -428,8 +428,9 @@ if (!function_exists('getIPInfo')) {
  * Filter posts by custom taxonomies in admin
  */
 if (!function_exists('adminCustomTaxonomyFilters')) {
-    function adminCustomTaxonomyFilters($cases, $selectLabel = 'Filter by')
+    function adminCustomTaxonomyFilters($cases, $selectLabel = 'Filter by', $textDomain = WP_POWER_TEXT_DOMAIN)
     {
+        //Display dropdown
         add_action('restrict_manage_posts', function () use ($cases, $selectLabel) {
             global $typenow;
         
@@ -444,7 +445,7 @@ if (!function_exists('adminCustomTaxonomyFilters')) {
             
                         if (is_object($infoTaxonomy)) {
                             wp_dropdown_categories(array(
-                                'show_option_all' => sprintf( __($selectLabel . ' %s', 'textdomain'), strtolower($infoTaxonomy->labels->singular_name)),
+                                'show_option_all' => sprintf( __($selectLabel . ' %s', $textDomain), strtolower($infoTaxonomy->labels->singular_name)),
                                 'taxonomy' => $taxonomy,
                                 'name' => $taxonomy,
                                 'orderby' => 'name',
@@ -458,6 +459,7 @@ if (!function_exists('adminCustomTaxonomyFilters')) {
             }
         });
 
+        //Update filter query
         add_filter('parse_query', function ($query) use ($cases) {
             global $pagenow;
         
@@ -471,7 +473,7 @@ if (!function_exists('adminCustomTaxonomyFilters')) {
                     if (
                         $pagenow === 'edit.php' && 
                         isset($qVars['post_type']) && 
-                        $qVars['post_type'] == $postType && 
+                        $qVars['post_type'] === $postType && 
                         isset($qVars[$taxonomy]) && 
                         is_numeric($qVars[$taxonomy]) && 
                         (int) $qVars[$taxonomy] !== 0 
