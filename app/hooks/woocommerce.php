@@ -19,7 +19,9 @@ add_filter('woocommerce_is_rest_api_request', function ($isRestAPIRequest) {
  * Add WooCommerce theme support
  */
 add_action('after_setup_theme', function () {
-    add_theme_support('woocommerce');
+    if (!defined('APP_TD')) {
+        add_theme_support('woocommerce');
+    }
 });
 
 /**
