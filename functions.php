@@ -19,23 +19,23 @@ require 'config/woocommerce.php';
 /**
  * Helpers
  */
-require 'app/helpers/custom-functions.php';
+require 'app/Helpers/custom-functions.php';
 
 /**
  * Hooks
  */
-require 'app/hooks/updates-handler.php';
-require 'app/hooks/assets.php';
-require 'app/hooks/templates.php';
-require 'app/hooks/post-types.php';
-require 'app/hooks/post-statuses.php';
-require 'app/hooks/taxonomies.php';
-require 'app/hooks/user-taxonomies.php';
-require 'app/hooks/shortcodes.php';
-require 'app/hooks/meta-boxes.php';
-require 'app/hooks/user-roles.php';
-require 'app/hooks/woocommerce.php';
-require 'app/hooks/misc.php';
+require 'app/Hooks/updates-handler.php';
+require 'app/Hooks/assets.php';
+require 'app/Hooks/templates.php';
+require 'app/Hooks/post-types.php';
+require 'app/Hooks/post-statuses.php';
+require 'app/Hooks/taxonomies.php';
+require 'app/Hooks/user-taxonomies.php';
+require 'app/Hooks/shortcodes.php';
+require 'app/Hooks/meta-boxes.php';
+require 'app/Hooks/user-roles.php';
+require 'app/Hooks/woocommerce.php';
+require 'app/Hooks/misc.php';
 
 /**
  * WP Rest API
