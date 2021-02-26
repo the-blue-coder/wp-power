@@ -34,6 +34,7 @@ require 'app/Hooks/user-taxonomies.php';
 require 'app/Hooks/shortcodes.php';
 require 'app/Hooks/meta-boxes.php';
 require 'app/Hooks/user-roles.php';
+require 'app/Hooks/wp-crons.php';
 require 'app/Hooks/woocommerce.php';
 require 'app/Hooks/misc.php';
 
