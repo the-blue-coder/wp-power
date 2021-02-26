@@ -591,3 +591,20 @@ if (!function_exists('WPCreateCustomPostStatus')) {
         });
     }
 }
+
+/**
+ * Remove directory recursively
+ */
+function recursiveRemoveDirectory($directory)
+{
+    foreach(glob("{$directory}/*") as $file)
+    {
+        if (is_dir($file)) { 
+            recursiveRemoveDirectory($file);
+        } else if (!is_link($file)) {
+            unlink($file);
+        }
+    }
+
+    rmdir($directory);
+}
