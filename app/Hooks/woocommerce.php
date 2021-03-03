@@ -8,7 +8,7 @@ add_filter('woocommerce_is_rest_api_request', function ($isRestAPIRequest) {
         return $isRestAPIRequest;
     }
 
-    if (strpos($_SERVER['REQUEST_URI'], WP_POWER_APP_SLUG) === false) {
+    if (defined('WP_POWER_APP_SLUG') && strpos($_SERVER['REQUEST_URI'], WP_POWER_APP_SLUG) === false) {
         return $isRestAPIRequest;
     }
 
