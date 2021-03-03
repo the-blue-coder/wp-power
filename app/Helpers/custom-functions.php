@@ -42,6 +42,16 @@ if (!function_exists('getFullUrl')) {
 }
 
 /**
+ * Get dist url
+ */
+if (!function_exists('distUrl')) {
+    function distUrl($path = '')
+    {
+        return get_stylesheet_directory_uri() . '/dist' . ($path !== '' ? '/' . $path : '');
+    }
+}
+
+/**
  * Get user data
  */
 if (!function_exists('user')) {
