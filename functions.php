@@ -26,6 +26,7 @@ require 'app/Helpers/custom-functions.php';
  */
 require 'app/Hooks/updates-handler.php';
 require 'app/Hooks/assets.php';
+require 'app/Hooks/menus.php';
 require 'app/Hooks/templates.php';
 require 'app/Hooks/post-types.php';
 require 'app/Hooks/post-statuses.php';
