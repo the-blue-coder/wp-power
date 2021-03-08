@@ -9,6 +9,7 @@
 //         'menu_title' => 'Site options',
 //         'menu_slug' => 'site-options',
 //         'capability' => 'edit_posts',
+//         'position' => 70,
 //         'redirect' => false
 //     ]);
 // });
