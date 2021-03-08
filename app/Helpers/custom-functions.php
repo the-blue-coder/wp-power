@@ -619,3 +619,18 @@ if (!function_exists('recursiveRemoveDirectory')) {
         rmdir($directory);
     }
 }
+
+/**
+ * Convert keys to camel case
+ */
+if (!function_exists('convertKeysToCamelCase')) {
+    function convertKeysToCamelCase($array) 
+    {
+        $keys = array_map(function ($i) {
+            $parts = explode('_', $i);
+            return array_shift($parts). implode('', array_map('ucfirst', $parts));
+        }, array_keys($array));
+
+        return array_combine($keys, $array);
+    }
+}
