@@ -539,13 +539,13 @@ if (!function_exists('WPCreateCustomPostStatus')) {
         add_action('post_submitbox_misc_actions', function () use ($postType, $label, $slug) {
             global $post;
         
-            if ($post->post_type !== $postType) {
+            if (is_object($post) && $post->post_type !== $postType) {
                 return false;
             }
         
             $status = '';
         
-            if ($post->post_status === $slug) {
+            if (is_object($post) && $post->post_status === $slug) {
                 $status = "
                     jQuery('#post-status-display').text('" . $label . "');
                     jQuery('select[name=\"post_status\"]' ).val('" . $slug . "');
@@ -565,7 +565,7 @@ if (!function_exists('WPCreateCustomPostStatus')) {
         add_action('admin_footer-edit.php', function () use ($postType, $label, $slug) {
             global $post;
         
-            if ($post->post_type !== $postType) {
+            if (is_object($post) && $post->post_type !== $postType) {
                 return false;
             }
             
@@ -583,7 +583,7 @@ if (!function_exists('WPCreateCustomPostStatus')) {
         
             $arg = get_query_var('post_status');
         
-            if ($arg !== $slug){
+            if (is_object($post) && $arg !== $slug){
                 if ($post->post_status === $slug) {
                     echo "
                         <script>
@@ -605,16 +605,17 @@ if (!function_exists('WPCreateCustomPostStatus')) {
 /**
  * Remove directory recursively
  */
-function recursiveRemoveDirectory($directory)
-{
-    foreach(glob("{$directory}/*") as $file)
+if (!function_exists('recursiveRemoveDirectory')) {
+    function recursiveRemoveDirectory($directory)
     {
-        if (is_dir($file)) { 
-            recursiveRemoveDirectory($file);
-        } else if (!is_link($file)) {
-            unlink($file);
+        foreach (glob("{$directory}/*") as $file) {
+            if (is_dir($file)) { 
+                recursiveRemoveDirectory($file);
+            } else if (!is_link($file)) {
+                unlink($file);
+            }
         }
+    
+        rmdir($directory);
     }
-
-    rmdir($directory);
 }
