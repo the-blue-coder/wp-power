@@ -634,3 +634,19 @@ if (!function_exists('convertKeysToCamelCase')) {
         return array_combine($keys, $array);
     }
 }
+
+/**
+ * Sort array of datetime strings
+ */
+if (!function_exists('usortDateTimeStringsArray')) {
+    function usortDateTimeStringsArray($array)
+    {    
+        function dateSort($a, $b) {
+            return strtotime($a) - strtotime($b);
+        }
+        
+        usort($array, 'dateSort');
+        
+        return $array;
+    }
+}
