@@ -621,7 +621,7 @@ if (!function_exists('recursiveRemoveDirectory')) {
 }
 
 /**
- * Convert keys to camel case
+ * Convert array snake case to camel case
  */
 if (!function_exists('convertKeysToCamelCase')) {
     function convertKeysToCamelCase($array) 
