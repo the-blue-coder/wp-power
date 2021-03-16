@@ -21,7 +21,7 @@
 //     ];    
 
 //     $rewrite = [
-//         'slug' => 'plural-slug'
+//         'slug' => 'singular-slug'
 //     ];
 
 //     register_taxonomy(
