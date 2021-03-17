@@ -4,6 +4,13 @@
  * Taxonomy plural name
  */
 // add_action('init', function () {
+//     $slug = 'plural-name';
+//     $singularSlug = 'singular-name';
+
+//     $concernedPostTypes = [
+//         'post'
+//     ];
+
 //     $labels = [
 //         'name' => __('Plural', WP_POWER_TEXT_DOMAIN),
 //         'singular_name' => __('Singular', WP_POWER_TEXT_DOMAIN),
@@ -21,14 +28,12 @@
 //     ];    
 
 //     $rewrite = [
-//         'slug' => 'singular-slug'
+//         'slug' => $singularSlug
 //     ];
 
 //     register_taxonomy(
-//         'plural-slug',
-//         [
-//             'custom-post-type-slugs'
-//         ], 
+//         $slug,
+//         $concernedPostTypes, 
 //         [
 //             'labels' => $labels,
 //             'hierarchical' => true,
