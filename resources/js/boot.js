@@ -2,6 +2,13 @@
  * Global vars
  */
 window.WPPower = {
+    breakpoints: {
+        sm: 576,
+        md: 768,
+        lg: 991,
+        xl: 1280
+    },
+    
     configs: {},
 
     jQueryObjects: {},
