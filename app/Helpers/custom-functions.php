@@ -640,13 +640,25 @@ if (!function_exists('convertKeysToCamelCase')) {
  */
 if (!function_exists('usortDateTimeStringsArray')) {
     function usortDateTimeStringsArray($array)
-    {    
-        function dateSort($a, $b) {
+    {
+        usort($array, function ($a, $b) {
             return strtotime($a) - strtotime($b);
-        }
-        
-        usort($array, 'dateSort');
-        
+        });
+
+        return $array;
+    }
+}
+
+/**
+ * Key sort array of datetime strings
+ */
+if (!function_exists('uksortDateTimeStringsArray')) {
+    function uksortDateTimeStringsArray($array)
+    {
+        uksort($array, function ($a, $b) {
+            return strtotime($a) - strtotime($b);
+        });
+
         return $array;
     }
 }
