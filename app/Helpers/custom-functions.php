@@ -840,3 +840,13 @@ if (!function_exists('paginateLinks')) {
         return $r;
     }
 }
+
+/**
+ * PDF-clean paragraphs in a text (for conjoint use of )
+ */
+if (!function_exists('pdfCleanParagraphs')) {
+    function pdfCleanParagraphs($text)
+    {
+        return $text;
+    }
+}
