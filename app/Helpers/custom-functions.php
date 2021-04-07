@@ -842,11 +842,14 @@ if (!function_exists('paginateLinks')) {
 }
 
 /**
- * PDF-clean paragraphs in a text (for conjoint use of )
+ * PDF-clean paragraphs in a text (for conjoint use of ACF WYSIWYG field and Html2Pdf for example)
  */
-if (!function_exists('pdfCleanParagraphs')) {
+ if (!function_exists('pdfCleanParagraphs')) {
     function pdfCleanParagraphs($text)
     {
+        $text = str_replace('<p>', '', $text);
+        $text = str_replace('</p>', '<br /><br />', $text);
+
         return $text;
     }
 }
