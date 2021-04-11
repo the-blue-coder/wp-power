@@ -23,13 +23,6 @@ window.WPPower = {
 };
 
 /**
- * Force reload browser nav
- */
-$(window).on('popstate', function () {
-    window.location.reload();
-});
-
-/**
  * Ajax WP nonce token
  */
 $.ajaxSetup({
