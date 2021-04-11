@@ -211,6 +211,29 @@ class Helpers
     }
 
     /**
+     * Append query parameter to a URL string
+     */
+    appendQueryParameter(url, name, value) {
+        if (url.length === 0) {
+            return;
+        }
+    
+        let rawURL = url;
+    
+        if (rawURL.charAt(rawURL.length - 1) === "?") {
+            rawURL = rawURL.slice(0, rawURL.length - 1);
+        }
+    
+        const parsedURL = new URL(rawURL);
+        let parameters = parsedURL.search;
+    
+        parameters += (parameters.length === 0) ? "?" : "&";
+        parameters = `${parameters}${name}=${value}`;
+    
+        return `${parsedURL.origin}${parsedURL.pathname}${parameters}`;
+    }
+
+    /**
      * Convert RGB colors to HEX format
      */
     rgbToHex(rgb) {
