@@ -22,11 +22,12 @@ class Forms {
             e.preventDefault();
 
             let thisForm = $(this);
+            let thisFormID = thisForm.attr('id');
             let method = thisForm.attr('method');
             let endpoint = thisForm.attr('action');
             let recaptchaAction = thisForm.attr('data-recaptcha-action');
             let submitBtn = thisForm.find('[type="submit"]');
-            let formMessage = thisForm.find('.form-message');
+            let formMessageWrapper = thisForm.find('.form-message');
             let data = thisForm.serializeArray();
 
             const done = function () {
@@ -46,7 +47,7 @@ class Forms {
                 submitBtn.removeAttr('disabled');
 
                 if (typeof(message) !== 'undefined') {
-                    formMessage.html(message);
+                    formMessageWrapper.html(message);
                 }
             }
 
@@ -54,8 +55,12 @@ class Forms {
                 return;
             }
 
+            if (formMessageWrapper.length === 0) {
+                formMessageWrapper = $('.form-message[data-form="#' + thisFormID + '"]');
+            }
+
             submitBtn.attr('disabled', 'disabled');
-            formMessage.empty();
+            formMessageWrapper.empty();
 
             if (!recaptchaAction) {
                 self.ajax.send(endpoint, method, 'JSON', data, done, fail, always);
