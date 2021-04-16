@@ -58,6 +58,10 @@ class Forms {
             }
         }
 
+        const doAjax = function () {
+            self.ajax.send(endpoint, method, 'JSON', data, done, fail, always);
+        };
+
         if (submitBtn[0].hasAttribute('disabled')) {
             return;
         }
@@ -70,7 +74,7 @@ class Forms {
         formMessageWrapper.empty();
 
         if (!recaptchaAction) {
-            self.ajax.send(endpoint, method, 'JSON', data, done, fail, always);
+            doAjax();
             return;
         }
 
@@ -82,7 +86,7 @@ class Forms {
                               value: recaptchaToken
                           });
 
-                          self.ajax.send(endpoint, method, 'JSON', data, done, fail, always);
+                          doAjax();
                       })
             ;
         });
