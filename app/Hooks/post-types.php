@@ -29,6 +29,8 @@
 //         'custom-fields'
 //     ];
 
+//     $rewrite = true;
+
 //     register_post_type(
 //         $slug, 
 //         [
@@ -41,7 +43,7 @@
 //             'menu_position' => $menuPosition,
 //             'show_in_menu' => true,
 //             'exclude_from_search' => false,
-//             'rewrite' => true,
+//             'rewrite' => $rewrite,
 //             'supports' => $supports
 //         ]
 //     );
