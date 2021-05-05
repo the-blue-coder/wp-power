@@ -42,6 +42,7 @@
 //             'menu_icon' => $dashicon,
 //             'menu_position' => $menuPosition,
 //             'show_in_menu' => true,
+//             'show_in_nav_menus' => true,
 //             'exclude_from_search' => false,
 //             'rewrite' => $rewrite,
 //             'supports' => $supports
