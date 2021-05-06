@@ -371,11 +371,11 @@ class Helpers
     }
 
     /**
-     * Check if is a valid email
+     * Check if a string is a valid email
      */
     isValidEmail(email) {
-        const regexp = /^[\w.%+-]+@[\w.-]+\.[\w]{2,6}$/;
-        
+        const regexp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
         return regexp.test(email);
     }
 }
