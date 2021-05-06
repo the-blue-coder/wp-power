@@ -369,6 +369,15 @@ class Helpers
 
         return false;
     }
+
+    /**
+     * Check if is a valid email
+     */
+    isValidEmail(email) {
+        const regexp = /^[\w.%+-]+@[\w.-]+\.[\w]{2,6}$/;
+        
+        return regexp.test(email);
+    }
 }
 
 export default Helpers;
