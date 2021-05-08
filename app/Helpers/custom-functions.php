@@ -853,3 +853,19 @@ if (!function_exists('paginateLinks')) {
         return $text;
     }
 }
+
+/**
+ * Urlify a string
+ */
+if (!function_exists('urlify')) {
+    function urlify($string)
+    {
+        $firstFourCharacters = substr($string, 0, 4);
+
+        if ($firstFourCharacters !== 'http') {
+            $string = 'http://' . $string;
+        }
+
+        return $string;
+    }
+}
