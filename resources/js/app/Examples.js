@@ -33,6 +33,10 @@ class Examples {
                 thisBtn.removeClass('disabled');
             };
 
+            if (thisBtn.is('.disabled')) {
+                return;
+            }
+
             thisBtn.addClass('disabled');
 
             self.ajax.get(window.location.href, 'JSON', data, done, fail, always);
