@@ -37,8 +37,12 @@ class Forms {
         let formMessageWrapper = thisForm.find('.form-message');
         let data = thisForm.serializeArray();
 
-        const done = function () {
-            thisForm.trigger('reset');
+        const done = function (response) {
+            if (typeof(response.redirectUrl) !== 'undefined' && response.redirectUrl) {
+                window.location.href = response.redirectUrl;
+            } else {
+                thisForm.trigger('reset');
+            }
         };
 
         const fail = function (response) {
