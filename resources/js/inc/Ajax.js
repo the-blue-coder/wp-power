@@ -25,7 +25,8 @@ class Ajax {
             dataType: dataType,
             data: data,
             processData: false,
-            contentType: false
+            contentType: false,
+            enctype: 'multipart/form-data'
         }).done(done).fail(fail).always(always);
     }
 
