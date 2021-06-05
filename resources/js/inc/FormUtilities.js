@@ -1,7 +1,7 @@
 import Ajax from './Ajax';
 import Helpers from './Helpers';
 
-class Forms {
+class FormUtilities {
     constructor() {
         this.ajax = new Ajax();
         this.helpers = new Helpers();
@@ -90,4 +90,4 @@ class Forms {
     }
 }
 
-export default Forms;
+export default FormUtilities;
