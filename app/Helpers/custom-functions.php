@@ -869,3 +869,100 @@ if (!function_exists('urlify')) {
         return $string;
     }
 }
+
+/**
+ * Custom breadcrumb
+ */
+if (!function_exists('theBread')) {
+
+    /**
+     * Display the bread, a formatted crumbs list.
+     * 
+     * @since 1.0.0
+     * 
+     * @param Array $ingredients[separator] The crumb's separator. Default to >.
+     * @param Array $ingredients[offset] Crumbs offset. Accept positive/negative Integer. Default to 0. Refer to array_slice. https://www.php.net/manual/en/function.array-slice.php.
+     * @param Array $ingredients[length] Crumbs length. Accept positive/negative Integer. Default to null. Refer to array_slice. https://www.php.net/manual/en/function.array-slice.php.
+     * 
+     * @return Array Formated crumbs list.
+     */
+    function theBread(
+        $ingredients = [
+            'separator' => '>',
+            'offset' => 0,
+            'length' => null,
+        ]
+    ) { 
+
+        $flour = $_SERVER['REQUEST_URI'];
+
+        if ( str_contains( $flour, '?' ) )
+            $flour = substr( $flour, 0, strpos( $flour, '?' ) );
+
+        $flour = ( str_ends_with( $flour, '/' ) ? explode( '/', substr( $flour, 1, -1 ) ) : explode( '/', substr( $flour, 1 ) ) );
+
+        $crumbs = [];
+
+        foreach ( $flour as $crumb ) {
+
+            $slug = esc_html( $crumb );
+
+            $url = esc_url( $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/' . substr( implode( '/', $flour ), 0, strpos( implode( '/', $flour ), $crumb ) ) . $crumb. '/' );
+
+            array_push( $crumbs, ( object )
+                [
+                    'slug' => $slug,
+                    'url' => $url,
+                ]
+            );
+
+        };
+
+        $offset =  ( empty( $ingredients['offset'] ) ? 0 : $ingredients['offset'] );
+        $length =  ( empty( $ingredients['length'] ) ? null : $ingredients['length'] );
+
+        $crumbs = array_slice( $crumbs, $offset, $length );
+
+        echo '<ol class="🍞 bread" itemscope itemtype="https://schema.org/BreadcrumbList">';
+
+        echo '<li class="crumb" itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem">
+            <a itemprop="item" href="http://lsdv-wp.loc/boutique/">
+                <span itemprop="name">Accueil</span>
+            </a>
+            <meta itemprop="position" content="1">
+        </li>';
+
+        $i = 0;
+        foreach ( $crumbs as $crumb ) {
+            $i++;
+
+            echo '<li class="crumb" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <a itemprop="item" href="' . $crumb->url . '">
+                    <span itemprop="name">' . ( url_to_postid( $crumb->url ) ? get_the_title( url_to_postid( $crumb->url ) ) : ucfirst( str_replace( '-', ' ', $crumb->slug ) ) ) . '</span>
+                </a>
+                <meta itemprop="position" content="' . $i . '">
+            </li>';
+
+            if ( $i !== sizeof( $crumbs ) && ! empty( $ingredients['separator'] ) )
+                echo $ingredients['separator'];
+
+        };
+
+        echo '</ol>';
+
+    };
+
+};
+
+/**
+ * Fix WP Query having offset
+ */
+if (!function_exists('fixWPQueryWithOffset')) {
+    function fixWPQueryWithOffset($query, $offsetStart, $postsPerPage)
+    {
+        $query->found_posts = $query->found_posts - $offsetStart;
+        $query->max_num_pages = (float) ceil($query->found_posts / $postsPerPage);
+    
+        return $query;
+    }
+}
