@@ -20,6 +20,7 @@ require 'config/woocommerce.php';
  * Helpers
  */
 require 'app/Helpers/custom-functions.php';
+require 'app/Helpers/conditional-tags.php';
 
 /**
  * Hooks
