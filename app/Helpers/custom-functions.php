@@ -966,3 +966,13 @@ if (!function_exists('fixWPQueryWithOffset')) {
         return $query;
     }
 }
+
+/**
+ * Get current term
+ */
+if (!function_exists('getCurrentTerm')) {
+    function getCurrentTerm()
+    {
+        return get_term_by('slug', get_query_var('term'), get_query_var('taxonomy'));
+    }
+}
