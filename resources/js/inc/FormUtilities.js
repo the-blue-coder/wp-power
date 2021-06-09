@@ -7,7 +7,7 @@ class FormUtilities {
         this.helpers = new Helpers();
     }
 
-    doAjaxSubmit(form) {
+    doAjaxSubmit(form, resetAfterSuccess = true) {
         let self = this;
 
         let formID = form.attr('id');
@@ -22,7 +22,10 @@ class FormUtilities {
             if (typeof(response.redirectUrl) !== 'undefined' && response.redirectUrl) {
                 window.location.href = response.redirectUrl;
             } else {
-                form.trigger('reset');
+                if (resetAfterSuccess) {
+                    form.trigger('reset');
+                }
+                
                 fileFakeBtn.html('Ajouter un fichier');
             }
         };
