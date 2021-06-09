@@ -976,3 +976,13 @@ if (!function_exists('getCurrentTerm')) {
         return get_term_by('slug', get_query_var('term'), get_query_var('taxonomy'));
     }
 }
+
+/**
+ * Format number
+ */
+if (!function_exists('formatNumber')) {
+    function formatNumber($number, $separator = '.', $numberAfterComma = 2)
+    {
+        return number_format(floor($number * 100) / 100, $numberAfterComma, $separator, '');
+    }
+}
