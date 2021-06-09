@@ -986,3 +986,15 @@ if (!function_exists('formatNumber')) {
         return number_format(floor($number * 100) / 100, $numberAfterComma, $separator, '');
     }
 }
+
+/**
+ * Get WooCommerce product image url
+ */
+if (!function_exists('getWCProductImageUrl')) {
+    function getWCProductImageUrl($product)
+    {
+        $productImageID = $product->get_image_id();
+    
+        return wp_get_attachment_url($productImageID);
+    }
+}
