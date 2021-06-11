@@ -676,7 +676,7 @@ if (!function_exists('getCurrentWPPage')) {
 }
 
 /**
- * Get pagination links 
+ * Get pagination links (inspired by the paginate_links WordPress function)
  */
 if (!function_exists('getPaginationLinks')) {
     function getPaginationLinks($query, $paged) 
