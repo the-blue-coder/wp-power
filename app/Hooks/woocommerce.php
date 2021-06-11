@@ -28,5 +28,5 @@ add_action('after_setup_theme', function () {
  * Templates overriding
  */
 add_filter('woocommerce_template_path', function(){
-	return 'views/e-shop/woo-templates/';
+	// return 'views/e-shop/woo-templates/';
 });

@@ -664,13 +664,58 @@ if (!function_exists('uksortDateTimeStringsArray')) {
 }
 
 /**
- * Custom paginate links (copie from WordPress paginate_links
- * and removed the "Merge additional query vars found in the original URL into 'add_args' array." part
+ * Get current WP page (pagination)
  */
-if (!function_exists('paginateLinks')) {
-    function paginateLinks( $args = '' ) 
+if (!function_exists('getCurrentWPPage')) {
+    function getCurrentWPPage()
+    {
+        $pageQueryVar = is_search() ? 'paged' : 'page';
+    
+        return max(1, get_query_var($pageQueryVar));
+    }
+}
+
+/**
+ * Get pagination links 
+ */
+if (!function_exists('getPaginationLinks')) {
+    function getPaginationLinks($query, $paged) 
     {
         global $wp_query, $wp_rewrite;
+
+        $base = getPagenumLink(1);
+
+        if (count($_GET) > 0) {
+            $base .= '%_%';
+
+            foreach ($_GET as $key => $value) {
+                if (is_array($value)) {
+                    foreach ($value as $subValue) {
+                        $base = add_query_arg($key . '[]', $subValue, $base);
+                    }
+                } else {
+                    $base = add_query_arg($key, $value, $base);
+                }
+            }
+        } else {
+            $base .= '%_%';
+        }
+
+        $args = [
+            'base' => $base,
+            'total' => $query->max_num_pages,
+            'current' => $paged,
+            'format' => 'page/%#%',
+            'show_all' => false,
+            'type' => 'plain',
+            'end_size' => 2,
+            'mid_size' => 1,
+            'prev_next' => true,
+            'prev_text' => sprintf('<i></i> %1$s', '<'),
+            'next_text' => sprintf('%1$s <i></i>', '>'),
+            'add_args' => false,
+            'add_fragment' => '',
+        ];
 
         // Setting up default values based on the current URL.
         $pagenum_link = html_entity_decode( get_pagenum_link() );
@@ -838,6 +883,81 @@ if (!function_exists('paginateLinks')) {
         }
 
         return $r;
+    }
+}
+
+/**
+ * Custom get pagenum link (copied from WordPress get_pagenum_link function)
+ * Changed the $request part
+ */
+if (!function_exists('getPagenumLink')) {
+    function getPagenumLink($pagenum = 1, $escape = true) {
+        global $wp_rewrite;
+    
+        $pagenum = (int) $pagenum;
+
+        $request = strtok($_SERVER["REQUEST_URI"], '?');
+        $request = remove_query_arg('paged', $request);
+    
+        $home_root = parse_url( home_url() );
+        $home_root = ( isset( $home_root['path'] ) ) ? $home_root['path'] : '';
+        $home_root = preg_quote( $home_root, '|' );
+    
+        $request = preg_replace( '|^' . $home_root . '|i', '', $request );
+        $request = preg_replace( '|^/+|', '', $request );
+    
+        if ( ! $wp_rewrite->using_permalinks() || is_admin() ) {
+            $base = trailingslashit( get_bloginfo( 'url' ) );
+    
+            if ( $pagenum > 1 ) {
+                $result = add_query_arg( 'paged', $pagenum, $base . $request );
+            } else {
+                $result = $base . $request;
+            }
+        } else {
+            $qs_regex = '|\?.*?$|';
+            preg_match( $qs_regex, $request, $qs_match );
+    
+            if ( ! empty( $qs_match[0] ) ) {
+                $query_string = $qs_match[0];
+                $request      = preg_replace( $qs_regex, '', $request );
+            } else {
+                $query_string = '';
+            }
+    
+            $request = preg_replace( "|$wp_rewrite->pagination_base/\d+/?$|", '', $request );
+            $request = preg_replace( '|^' . preg_quote( $wp_rewrite->index, '|' ) . '|i', '', $request );
+            $request = ltrim( $request, '/' );
+    
+            $base = trailingslashit( get_bloginfo( 'url' ) );
+    
+            if ( $wp_rewrite->using_index_permalinks() && ( $pagenum > 1 || '' !== $request ) ) {
+                $base .= $wp_rewrite->index . '/';
+            }
+    
+            if ( $pagenum > 1 ) {
+                $request = ( ( ! empty( $request ) ) ? trailingslashit( $request ) : $request ) . user_trailingslashit( $wp_rewrite->pagination_base . '/' . $pagenum, 'paged' );
+            }
+    
+            $result = $base . $request . $query_string;
+        }
+    
+        /**
+         * Filters the page number link for the current request.
+         *
+         * @since 2.5.0
+         * @since 5.2.0 Added the `$pagenum` argument.
+         *
+         * @param string $result  The page number link.
+         * @param int    $pagenum The page number.
+         */
+        $result = apply_filters( 'get_pagenum_link', $result, $pagenum );
+    
+        if ( $escape ) {
+            return esc_url( $result );
+        } else {
+            return esc_url_raw( $result );
+        }
     }
 }
 
