@@ -52,7 +52,7 @@ class FormUtilities {
 
             self.helpers.formErrors(form, response.responseJSON.errors);
 
-            let firstError = $('#' + formID).find('.error:not(:hidden)').eq(0);
+            let firstError = $('#' + formID).find('.error:not(:empty)').eq(0);
 
             self.helpers.scrollToElement('default', firstError, -100);
         };
