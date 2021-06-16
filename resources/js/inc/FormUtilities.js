@@ -7,6 +7,20 @@ class FormUtilities {
         this.helpers = new Helpers();
     }
 
+    autoDiscover() {
+        let self = this;
+
+        let forms = $('form.c-ajax-form');
+
+        forms.on('submit', function (e) {
+            e.preventDefault();
+
+            let thisForm = $(this);
+            
+            self.doAjaxSubmit(thisForm);
+        });
+    }
+
     doAjaxSubmit(form, resetAfterSuccess = true) {
         let self = this;
 
