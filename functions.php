@@ -40,6 +40,7 @@ require 'app/Hooks/user-roles.php';
 require 'app/Hooks/wp-crons.php';
 require 'app/Hooks/acf-options-pages.php';
 require 'app/Hooks/woocommerce.php';
+require 'app/Hooks/woocommerce-account-tabs.php';
 require 'app/Hooks/misc.php';
 
 /**
