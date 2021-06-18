@@ -12,6 +12,15 @@ $externalUrlsSlugs = [
 ];
 
 /**
+ * Remove some tabs in "my account" section
+ */
+add_filter('woocommerce_account_menu_items', function ($menuLinks) {
+    // unset($menuLinks['orders']);
+
+    return $menuLinks;
+});
+
+/**
  * Register new endpoints slugs to use for My Account page
  */
 add_action('init', function () use ($customEndpoints) {
