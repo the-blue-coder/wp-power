@@ -33,7 +33,9 @@ add_action('init', function () use ($customEndpoints) {
  * Add new query vars
  */
 add_filter('woocommerce_get_query_vars', function ($vars) use ($customEndpoints) {
-    $vars = array_keys($customEndpoints);
+    $customEndpointsSlugs = array_keys($customEndpoints);
+    $vars = array_merge($vars, $customEndpointsSlugs);
+    
     return $vars;
 });
   
