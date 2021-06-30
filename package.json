@@ -18,6 +18,7 @@
     "cropperjs": "^1.5.9",
     "cross-env": "^7.0.2",
     "dropzone": "^5.7.2",
+    "emmet": "^2.3.4",
     "html2canvas": "^1.0.0-rc.7",
     "jcf": "^1.2.3",
     "jquery": "^3.5.1",
