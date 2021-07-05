@@ -1118,3 +1118,30 @@ if (!function_exists('getWCProductImageUrl')) {
         return wp_get_attachment_url($productImageID);
     }
 }
+
+/**
+ * Get post primary term ID
+ */
+if (!function_exists('getPostPrimaryTermID')) {
+    function getPostPrimaryTermID($postID, $taxonomySlug) 
+    {
+        $prmTerm = '';
+
+        if (class_exists('WPSEO_Primary_Term')) {
+            $wpseoPrimaryTerm = new WPSEO_Primary_Term($taxonomySlug, $postID);
+            $prmTerm = $wpseoPrimaryTerm->get_primary_term();
+        }
+
+        if (!is_object($wpseoPrimaryTerm) && empty($prmTerm)) {
+            $term = wp_get_post_terms($postID, $taxonomySlug);
+
+            if (isset($term) && !empty($term)) {
+                return wp_get_post_terms($postID, $taxonomySlug)[0]->term_id;
+            } else {
+                return '';
+            }
+        }
+
+        return $wpseoPrimaryTerm->get_primary_term();
+    }
+}
