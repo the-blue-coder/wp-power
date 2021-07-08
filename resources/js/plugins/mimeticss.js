@@ -25,9 +25,9 @@ export default function mimeticss(args = {}) {
     global.expand = expand;
 
     const config = {
-        abbrSplitter: "+#0_+",
+        abbrSplitter: '+#0_+',
         breakpoints: {
-            base: "",
+            base: '',
             xl: 1400,
             lg: 1200,
             md: 992,
@@ -36,14 +36,14 @@ export default function mimeticss(args = {}) {
         },
         mobileFirst: true,
         colors: {
-            t: "transparent",
-            w: "white",
-            b: "black",
+            t: 'transparent',
+            w: 'white',
+            b: 'black',
         },
         fonts: {
-            0: "icon",
-            1: "Arial",
-            2: "'Comic Sans Ms'",
+            0: 'icon',
+            1: 'Arial',
+            2: 'Comic Sans Ms',
         },
         css: {},
         output: {}
@@ -52,10 +52,10 @@ export default function mimeticss(args = {}) {
     //deep assign arguments
     for (let x in config) {
         switch (true) {
-            case (typeof (args[x]) === "object"):
+            case (typeof (args[x]) === 'object'):
                 Object.assign(config[x], args[x]);
                 break;
-            case (typeof (args[x]) !== "undefined"):
+            case (typeof (args[x]) !== 'undefined'):
                 config[x] = args[x];
                 break;
         }
@@ -99,9 +99,9 @@ export default function mimeticss(args = {}) {
 
         const getClassList = () => {
             const tags = document.querySelectorAll('[class*=":"]');
-            let classList = "";
+            let classList = '';
             tags.forEach(tag => {
-                classList += tag.getAttribute('class') + " ";
+                classList += tag.getAttribute('class') + ' ';
             });
             return classList;
         }
@@ -112,12 +112,12 @@ export default function mimeticss(args = {}) {
         }
 
         const cleanAbbrList = () => {
-            classList = classList.split(" ")
-            return Array.from(new Set(classList)).sort().join(" ");
+            classList = classList.split(' ')
+            return Array.from(new Set(classList)).sort().join(' ');
         }
 
         const addAbbrSeparator = () => {
-            return classList.replaceAll(" ", config.abbrSplitter);
+            return classList.replaceAll(' ', config.abbrSplitter);
         }
 
         const convertResponsiveAbbr = () => {
@@ -138,8 +138,8 @@ export default function mimeticss(args = {}) {
                 }
             }
             /*
-            //remove remaining ";"
-            classList = classList.replaceAll(";", ""); */
+            //remove remaining ';'
+            classList = classList.replaceAll(';', ''); */
 
             return classList;
         }
@@ -162,7 +162,7 @@ export default function mimeticss(args = {}) {
 
             // console.log(classList);
             for (let x in config.colors) {
-                const regex = new RegExp("([^\s+]*c:)(" + x + ")\\s", "gi");
+                const regex = new RegExp('([^\s+]*c:)(' + x + ')\\s', 'gi');
                 //console.log(regex);
                 classList = classList.replace(regex, '$1' + config.colors[x] + ' ');
             }
@@ -176,13 +176,13 @@ export default function mimeticss(args = {}) {
         }
 
         const expandAbbr = () => {
-            classList = expand(classList, { type: "stylesheet" }).replaceAll(/\s/gi, ' ');
+            classList = expand(classList, { type: 'stylesheet' }).replaceAll(/\s/gi, ' ');
 
             // console.log(classList);
             // ff (ie ff:0 to ff:Arial)
             for (let x in config.fonts) {
                 //console.log(x);
-                const regex = new RegExp("(font-family: )(" + x + ")(px)?", "gi");
+                const regex = new RegExp('(font-family: )(' + x + ')(px)?', 'gi');
                 // console.log(regex);
                 classList = classList.replace(regex, '$1' + config.fonts[x]);
             }
@@ -209,24 +209,24 @@ export default function mimeticss(args = {}) {
         }
 
         const addSelectors = () => {
-            const selectorArray = selectorList.split(" ");
+            const selectorArray = selectorList.split(' ');
             const classArray = classList.split(' ' + expand(config.abbrSplitter, { type: 'stylesheet' }) + ' ');
             // console.log(selectorArray);
             // console.log(classArray);
 
             // clean config.css
             for (let x in config.css) {
-                config.css[x] = "";
+                config.css[x] = '';
             }
 
             for (let x = 0; x < selectorArray.length; x++) {
                 const selector = selectorArray[x];
                 // console.log(classArray[x]);
-                for (let property of classArray[x].matchAll(/#0+([_a-z]+)\s((?:[a-z-]+:\s[a-z0-9-%#'" ]+;\s?)+)/gi)) {
+                for (let property of classArray[x].matchAll(/#0+([_a-z]+)\s((?:[a-z-]+:\s[a-z0-9-%#'' ]+;\s?)+)/gi)) {
                     // console.log(`${property[1]} : ${selector}{${property[2]}}`);
-                    config.css[property[1]] = (config.css[property[1]] || "") + `${selector}{${property[2]}}`;
+                    config.css[property[1]] = (config.css[property[1]] || '') + `${selector}{${property[2]}}`;
                 }
-                // console.log("");
+                // console.log('');
             }
             // console.log(config.css);
 
@@ -234,14 +234,14 @@ export default function mimeticss(args = {}) {
         }
 
         const output = () => {
-            // const selectorArray = selectorList.split(" ");
+            // const selectorArray = selectorList.split(' ');
             // const classArray = classList.split(' ' + expand(config.abbrSplitter, { type: 'stylesheet' }) + ' ');
             // console.log(selectorArray);
             // console.log(classArray);
             const body = document.body;
             let output = `${config.css['base']}`;
             for (let x in config.breakpoints) {
-                if (x !== "base") {
+                if (x !== 'base') {
                     const direction = (config.mobileFirst)? 'min-width':'max-width';
                     output += `@media (${direction}:${config.breakpoints[x]}px){${config.css[x]}}`;
                     // console.log(output);
@@ -250,7 +250,7 @@ export default function mimeticss(args = {}) {
             if (config.output !== output) {
                 config.output = output;
                 const $style = (document.querySelectorAll('#mimeticss').length == 0) ? document.createElement('style') : document.querySelectorAll('#mimeticss')[0];
-                $style.innerText = "";
+                $style.innerText = '';
                 $style.setAttribute('type', 'text/css');
                 $style.setAttribute('id', 'mimeticss');
                 $style.innerText = output;
@@ -299,30 +299,20 @@ export default function mimeticss(args = {}) {
 
 mimeticss({
     colors: {
-        0: "black",
-        1: "#b69373",
-        2: "#111111",
-        3: "#a8a8aa",
-        4: "#ffb900",
-        5: "#dbdbdb",
-        6: "#252525",
-        7: "#eef8ff",
-        8: "#f8f8f8",
-        9: "#707070",
-        10: "#0000ff"
+        0: 'black',
+
     },
 		breakpoints: {
-				base: "",
+				base: '',
 				xl: 1399,
 				lg: 1199,
 				md: 991,
 				sm: 767,
-				xs: 575,
+				xs: 575
 		},
 		fonts: {
-				0: "icon",
-				1: "DIN Alternate",
-				2: "Geneva Regular",
+				0: 'icon',
+
 		},
     mobileFirst: false
 });
