@@ -22,7 +22,7 @@ window.WPPower = {
     jQueryObjects: {},
 
     PHPToJS: {
-        WPRestNonce: $('meta[name="nonce-token"]').attr('content')
+        WPRestNonce: $('meta[name="wp-rest-nonce-token"]').attr('content')
     },
 
     PHPToJSAdmin: {
