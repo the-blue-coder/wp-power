@@ -25,6 +25,7 @@ require 'app/Helpers/conditional-tags.php';
 /**
  * Hooks
  */
+require 'app/Hooks/global-vars.php';
 require 'app/Hooks/updates-handler.php';
 require 'app/Hooks/assets.php';
 require 'app/Hooks/menus.php';
