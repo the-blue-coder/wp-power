@@ -1,15 +1,7 @@
-import Ajax from './inc/Ajax';
-import Helpers from './inc/Helpers';
-import FormUtilities from './inc/FormUtilities';
-
 /**
  * Global vars
  */
 window.WPPower = {
-    ajax: new Ajax(),
-    helpers: new Helpers(),
-    formUtilities: new FormUtilities(),
-
     breakpoints: {
         sm: 576,
         md: 768,
