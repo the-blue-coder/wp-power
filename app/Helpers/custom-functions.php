@@ -1145,3 +1145,13 @@ if (!function_exists('getPostPrimaryTermID')) {
         return $wpseoPrimaryTerm->get_primary_term();
     }
 }
+
+/**
+ * Check if the request is from this site
+ */
+if (!function_exists('isRequestFromThisSite')) {
+    function isRequestFromThisSite()
+    {
+        return get_http_origin() === get_home_url();
+    }
+}
